@@ -6,48 +6,67 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Document</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <title><?= include 'config/data.php' ?></title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php?page=start">Start</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php?page=contacts">Kontakte</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php?page=legal">Impressum</a>
-                    </li>
-                </ul>
+
+    <header>
+        <h1>My Contact Book</h1>
+    </header>
+
+    <main class="d-flex ">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="flex-column navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.php?page=start">Start</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.php?page=contacts">Kontakte</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.php?page=addcontact">Kontakt hinzufügen</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.php?page=legal">Impressum</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
- 
-    <?php
-    $headline = "Herzlich Willkommen!";
-    $start = "Das ist die Start seite!";
-    $noStart = "Das ist nicht die Start seite!";
+        </nav>
+        <section class="content">
+            <?php
+            $headline = "Herzlich Willkommen!";
+            $start = "Das ist die Start seite!";
+            $noStart = "Das ist nicht die Start seite!";
+
+            if ($_GET['page'] == "contacts") {
+                $headline = "Deine Kontakte";
+            } elseif ($_GET['page'] == "addcontact") {
+                $headline = "Kontakt hinzufügen";
+            } elseif ($_GET['page'] == "legal") {
+                $headline = "Impressum";
+            }
+
+            echo "<h2>{$headline}</h2>";
+
+            ?>
+        </section>
+
+    </main>
+
+    <footer>
+        <span>copyrigth by GeryHell</span>
+    </footer>
 
 
-    echo "<h1>{$headline}</h1>";
-    echo "<h1>{$_GET['page']}</h1>";
-    
-    if ($_GET['page'] == "start") {
-        echo "<h1>{$start}</h1>";
-    } else {
-        echo "<h1>{$noStart}</h1>";
-    }
-    
-    ?>
+
 
 
 

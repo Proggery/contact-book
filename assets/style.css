@@ -1,0 +1,36 @@
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+body header {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2px;
+}
+body main {
+  height: 100%;
+}
+body main .navbar {
+  width: 20%;
+  display: flex;
+  align-items: baseline;
+}
+body main .content {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+body footer {
+  margin-top: auto;
+  height: 200px;
+  background: #343434;
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}/*# sourceMappingURL=style.css.map */
