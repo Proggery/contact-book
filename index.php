@@ -58,27 +58,77 @@
                 return $headline;
             }
 
+            $contacts = [];
+
+            if (file_exists('contacts.txt')) {
+                $text = file_get_contents('contacts.txt', true);
+                $contacts = json_decode($text, true);
+            }
+
+            if (isset($_POST['name']) && isset($_POST['phone'])) {
+                echo '<span>Kontakt <b>' . $_POST["name"] . '</b> wurde hinzugefügt</span>';
+                $newContact = [
+                    'name' => $_POST["name"],
+                    'phone' => $_POST["phone"]
+                ];
+                array_push($contacts, $newContact);
+                // JSON_PRETTY_PRINT => Json formatting
+                file_put_contents('contacts.txt', json_encode($contacts, JSON_PRETTY_PRINT));
+            }
+
             echo "<h2>" . headline() . "</h2>";
 
             // Content
             if ($_GET['page'] == "contacts") {
-                echo "";
-            } elseif ($_GET['page'] == "addcontact") {
+                echo '<span>Auf dieser Seite hast du einen Überblick über deine Kontakte</span>';
+                
                 echo "
-                <span class='my-3'>Auf dieser Seite kannst du einen weiteren Kontakt hinzufügen</span>
-                <div class='d-flex flex-column'>
-                    <input placeholder='Namen eingeben' name='name'>
-                    <input class='my-2' placeholder='Telefonnummer eingeben' name='phone'>
-                    <button type='submit'>Absenden</button>
+                <div class='container text-center'>
+                  <div class='row'>
+                  ";
+                  foreach ($contacts as $row) {
+                    $name = $row['name'];
+                    $phone = $row['phone'];
+
+                    echo "
+                      <div class='col-lg-4'>
+                      <div class='card mb-3' style='width: 18rem;'>
+                          <div class='card-img'><img src='./assets/avatar-3814049_640.png' class='card-img-top' alt='...'></div>
+                          <div class='card-body'>
+                            <h5 class='card-title'>
+                                {$name}
+                            </h5>
+                            <p class='card-text'>
+                                {$phone}
+                            </p>
+                            <a class='phonebtn' href='tel:$phone'>Anrufen</a>
+                          </div>
+                        </div>
+                        </div>
+                    ";
+                }
+                echo "
+                  </div>
                 </div>
                 ";
+
+            } elseif ($_GET['page'] == "addcontact") {
+                echo '
+                <span class="my-3">Auf dieser Seite kannst du einen weiteren Kontakt hinzufügen</span>
+                <div class="d-flex flex-column">
+                    <form action="/?page=contacts" method="POST">
+                        <input placeholder="Namen eingeben" name="name">
+                        <input class="my-2" placeholder="Telefonnummer eingeben" name="phone">
+                        <button type="submit">Absenden</button>
+                    </form>
+                </div>
+                ';
             } elseif ($_GET['page'] == "legal") {
-                echo "";
+                echo '';
             }
 
             ?>
         </section>
-
     </main>
 
     <footer>

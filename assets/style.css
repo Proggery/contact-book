@@ -25,6 +25,24 @@ body main .content {
   align-items: center;
   padding-top: 20px;
 }
+body main .content .card-img {
+  background: #f0f0f0;
+}
+body main .content .card-img .card-img-top {
+  width: 140px;
+  height: 140px;
+}
+body main .content .phonebtn {
+  background: rgb(0, 191, 255);
+  color: black;
+  text-decoration: none;
+  padding: 5px 20px;
+  border-radius: 5px;
+}
+body main .content .phonebtn:hover {
+  background: rgb(137, 226, 255);
+  box-shadow: inset -2px -2px 2px rgba(0, 0, 0, 0.1);
+}
 body footer {
   margin-top: auto;
   height: 200px;
