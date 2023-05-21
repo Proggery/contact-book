@@ -1,3 +1,7 @@
+<?php
+    $title = "My Contact Book";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +17,7 @@
 <body>
 
     <header>
-        <h1>My Contact Book</h1>
+        <h1><?php echo $title ?></h1>
     </header>
 
     <main class="d-flex ">
@@ -64,6 +68,10 @@
                 $text = file_get_contents('contacts.txt', true);
                 $contacts = json_decode($text, true);
             }
+            
+            if (isset($_POST['deleteContact'])) {
+                unlink('contacts.txt'); 
+            }
 
             if (isset($_POST['name']) && isset($_POST['phone'])) {
                 echo '<span>Kontakt <b>' . $_POST["name"] . '</b> wurde hinzugefügt</span>';
@@ -75,18 +83,19 @@
                 // JSON_PRETTY_PRINT => Json formatting
                 file_put_contents('contacts.txt', json_encode($contacts, JSON_PRETTY_PRINT));
             }
-
             echo "<h2>" . headline() . "</h2>";
-
             // Content
             if ($_GET['page'] == "contacts") {
                 echo '<span>Auf dieser Seite hast du einen Überblick über deine Kontakte</span>';
-                
+
                 echo "
                 <div class='container text-center'>
                   <div class='row'>
+                    <form action='/?page=addcontact' method='POST' >
+                        <input type='submit' name='deleteContact' value='Alle kontakte löschen'/>
+                    </form>
                   ";
-                  foreach ($contacts as $row) {
+                foreach ($contacts as $row) {
                     $name = $row['name'];
                     $phone = $row['phone'];
 
@@ -111,7 +120,6 @@
                   </div>
                 </div>
                 ";
-
             } elseif ($_GET['page'] == "addcontact") {
                 echo '
                 <span class="my-3">Auf dieser Seite kannst du einen weiteren Kontakt hinzufügen</span>
