@@ -22,7 +22,7 @@ body main .navbar {
 body main .content {
   width: 80%;
   display: flex;
-  justify-content: center;
+  align-items: center;
   padding-top: 20px;
 }
 body footer {

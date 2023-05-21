@@ -40,21 +40,41 @@
                 </div>
             </div>
         </nav>
-        <section class="content">
+        <section class="content flex-column">
             <?php
-            $headline = "Herzlich Willkommen!";
-            $start = "Das ist die Start seite!";
-            $noStart = "Das ist nicht die Start seite!";
 
-            if ($_GET['page'] == "contacts") {
-                $headline = "Deine Kontakte";
-            } elseif ($_GET['page'] == "addcontact") {
-                $headline = "Kontakt hinzufügen";
-            } elseif ($_GET['page'] == "legal") {
-                $headline = "Impressum";
+            function headline()
+            {
+                $headline = "Herzlich Willkommen!";
+
+                // Headline
+                if ($_GET['page'] == "contacts") {
+                    $headline = "Deine Kontakte";
+                } elseif ($_GET['page'] == "addcontact") {
+                    $headline = "Kontakt hinzufügen";
+                } elseif ($_GET['page'] == "legal") {
+                    $headline = "Impressum";
+                }
+                return $headline;
             }
 
-            echo "<h2>{$headline}</h2>";
+            echo "<h2>" . headline() . "</h2>";
+
+            // Content
+            if ($_GET['page'] == "contacts") {
+                echo "";
+            } elseif ($_GET['page'] == "addcontact") {
+                echo "
+                <span class='my-3'>Auf dieser Seite kannst du einen weiteren Kontakt hinzufügen</span>
+                <div class='d-flex flex-column'>
+                    <input placeholder='Namen eingeben' name='name'>
+                    <input class='my-2' placeholder='Telefonnummer eingeben' name='phone'>
+                    <button type='submit'>Absenden</button>
+                </div>
+                ";
+            } elseif ($_GET['page'] == "legal") {
+                echo "";
+            }
 
             ?>
         </section>
